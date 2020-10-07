@@ -43,5 +43,5 @@ ejemplo `https://www.segurossura.com.co/covid-19/encuestas/paginas/sintomas.aspx
 
 7. Verás cómo se abre una ventana de chromium que hace el registro por ti
 
-![ejemplo](registro.gif)
+![ejemplo](registro-v3.gif)
 
