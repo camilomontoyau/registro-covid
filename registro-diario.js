@@ -8,6 +8,8 @@ const puppeteer = require('puppeteer');
   const btnAutorizoSelector = 'button[name="data[page3SiAutorizo]"]';
   const inputIdentificacionSelector = 'input[name="data[identificacion_usuario]"]';
   const inputNombreSelector = 'input[name="data[nombre_usuario]"]';
+  const btnSiguiente1Selector = 'button[name="data[page1Siguiente]"]';
+  const btnSiguiente2Selector = 'button[name="data[page2Finalizar]"]';
   const identificacion = process.env.IDENTIFICACION;
   const nombre = process.env.NOMBRE;
 
@@ -28,13 +30,10 @@ const puppeteer = require('puppeteer');
   await page.keyboard.type(nombre);
   
 
-  await page.waitForSelector('button[name="data[page1Siguiente]"]');
-  await page.click('button[name="data[page1Siguiente]"]'); // acá
+  await page.waitForSelector(btnSiguiente1Selector);
+  await page.click(btnSiguiente1Selector);
 
-  await page.waitForSelector(
-    ".formio-form > div > .wizard-page > #em6s2v4 > .btn"
-  );
-  await page.click(".formio-form > div > .wizard-page > #em6s2v4 > .btn");
-
+  await page.waitForSelector(btnSiguiente2Selector);
+  await page.click(btnSiguiente2Selector);
   await browser.close();
 })();
