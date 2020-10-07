@@ -5,22 +5,31 @@ const puppeteer = require('puppeteer');
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   });
   const page = await browser.newPage();
+  const btnAutorizoSelector = 'button[name="data[page3SiAutorizo]"]';
+  const inputIdentificacionSelector = 'input[name="data[identificacion_usuario]"]';
+  const inputNombreSelector = 'input[name="data[nombre_usuario]"]';
+  const identificacion = process.env.IDENTIFICACION;
+  const nombre = process.env.NOMBRE;
 
   await page.goto(process.env.URL);
   
   await page.setViewport({ width: 1920, height: 978 });
 
-  await page.waitForSelector('button[name="data[page3SiAutorizo]"]');
-  await page.click('button[name="data[page3SiAutorizo]"]');
+  
+  await page.waitForSelector(btnAutorizoSelector);
+  await page.click(btnAutorizoSelector);
 
-  await page.waitForSelector('input[name="data[identificacion_usuario]"]');
-  await await page.$eval('input[name="data[identificacion_usuario]"]', el => el.value = process.env.IDENTIFICACION);
-
-  await page.waitForSelector('input[name="data[nombre_usuario]"]');
-  await await page.$eval('input[name="data[nombre_usuario]"]', el => el.value = process.env.NOMBRE); // acá
+  await page.waitForSelector(inputIdentificacionSelector);
+  await page.focus(inputIdentificacionSelector);
+  await page.keyboard.type(identificacion);
+  
+  await page.waitForSelector(inputNombreSelector);
+  await page.focus(inputNombreSelector);
+  await page.keyboard.type(nombre);
+  
 
   await page.waitForSelector('button[name="data[page1Siguiente]"]');
-  await page.click('button[name="data[page1Siguiente]"]');
+  await page.click('button[name="data[page1Siguiente]"]'); // acá
 
   await page.waitForSelector(
     ".formio-form > div > .wizard-page > #em6s2v4 > .btn"
